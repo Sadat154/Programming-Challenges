@@ -1,4 +1,4 @@
-rods = float(input("Input Rods: "))
+
 
 
 def rods_to_meters(rods):
@@ -28,11 +28,12 @@ def minutes_calculation(rodsToMiles):
 
 # print("Meters:",rTm(rods),"Feet:", rTf(rTm(rods)), "Miles:",rTmi(rTm(rods)),"Furlongs:", rTfu(rods),"Minutes To walk", rods, "rods:", minutes(rTmi(rTm(rods))))
 def run():
-    print(f"Meters: {rods_to_meters(rods)}")
-    print(f"Feet: {rods_to_feet(rods_to_meters(rods))}")
-    print(f"Miles: {rods_to_miles(rods_to_meters(rods))}")
-    print(f"Furlongs: {rods_to_furlongs(rods)}")
-    print(f"Minutes to walk {rods}: {minutes_calculation(rods_to_miles(rods_to_meters(rods)))}")
+	rods = float(input("Input Rods: "))
+	print(f"Meters: {rods_to_meters(rods)}")
+	print(f"Feet: {rods_to_feet(rods_to_meters(rods))}")
+	print(f"Miles: {rods_to_miles(rods_to_meters(rods))}")
+	print(f"Furlongs: {rods_to_furlongs(rods)}")
+	print(f"Minutes to walk {rods}: {minutes_calculation(rods_to_miles(rods_to_meters(rods)))}")
 
 
 if __name__ == "__main__":
