@@ -2,17 +2,16 @@ richterList = [1.0,5.0,9.1,9.2,9.5]
 
 
 def Joules(richter):
-    Joules = 10**((1.5*richter)+4.8)
-    return Joules
+    return 10**((1.5*richter)+4.8)
 
 def TNT(richter):
     Tons = Joules(richter) / (4.184*(10**9))
     return Tons
 
 def run():
-    print("Richter             Joules             TNT")
+    print(f"Richter        Joules                     TNT")
     for i in range (len(richterList)):
-      print(f"{richterList[i]}         {Joules(richterList[i])}        {TNT(richterList[i])}")
+      print(f"{richterList[i]:>2}{Joules(richterList[i]):>30} {TNT(richterList[i]):>30}")
     richter = float(input("Please enter a Richter scale value: "))
     print(f"Richter Value: {richter}")
     print(f"Equivalence in Joules: {Joules(richter)}")
