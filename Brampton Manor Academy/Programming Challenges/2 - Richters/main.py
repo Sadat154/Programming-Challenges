@@ -9,7 +9,7 @@ def TNT(richter):
     return Tons
 
 def run():
-    print(f"Richter        Joules                     TNT")
+    print(f" {'Richters'}{'Joules':>15}{'TNT':>25}")
     for i in range (len(richterList)):
       print(f"{richterList[i]:>2}{Joules(richterList[i]):>30} {TNT(richterList[i]):>30}")
     richter = float(input("Please enter a Richter scale value: "))
