@@ -1,4 +1,4 @@
-# this program took me so long it was so hard to get my head around it 😭
+# this program took me too long to complete...
 
 order_of_number = int(input("Please input the order of square: "))
 top_left_number = int(input("Please input the top left number: "))
