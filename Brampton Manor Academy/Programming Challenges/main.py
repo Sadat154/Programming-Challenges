@@ -22,14 +22,32 @@ def process_results(rows):
     originalVal = rows
     team_name_dictionary = {}
     counter = 0
+
     for row in rows:
 
         teams = originalVal[counter]
-        team_name_dictionary[teams[1]] = None
+
+        team_name_dictionary[teams[1]] = 0
+
+
         counter +=1
+    counter = 0
+    for row in rows:
+        teams = originalVal[counter]
 
 
+        if teams[5] == "H":
+            team_name_dictionary[teams[1]] += 3
+        elif teams[5] == "A":
+            team_name_dictionary[teams[2]] += 3
+        else:
+            team_name_dictionary[teams[1]] += 1
+            team_name_dictionary[teams[2]] += 1
+        counter += 1
 
+
+    print(team_name_dictionary[teams[1]])
+    print(team_name_dictionary[teams[2]])
     return team_name_dictionary
 
 
@@ -44,6 +62,4 @@ if __name__ == "__main__":
     teamName = dict(sorted(process_results(file_contents).items()))
 
     for key in teamName:
-        print(key)
-    print(file_contents)
-    print(process_results(file_contents))
+        print(f"{key:>20}{teamName[key]:>69}")
