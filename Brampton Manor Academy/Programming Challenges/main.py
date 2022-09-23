@@ -31,6 +31,7 @@ def process_results(rows):
 
 
         counter +=1
+
     counter = 0
     for row in rows:
         teams = originalVal[counter]
@@ -45,10 +46,17 @@ def process_results(rows):
             team_name_dictionary[teams[2]] += 1
         counter += 1
 
+        
 
-    print(team_name_dictionary[teams[1]])
-    print(team_name_dictionary[teams[2]])
-    return team_name_dictionary
+    teamName = sorted(team_name_dictionary.items(), key=lambda x: x[1], reverse=True)
+    print(teamName)
+
+
+
+
+
+
+    return teamName
 
 
 
@@ -59,7 +67,8 @@ print(f"{'Place':<10} {'Team Name':<20} {'Wins':<10} {'Draws':<10} {'Losses':<10
 
 if __name__ == "__main__":
     file_contents = read_csv(csv_file)
-    teamName = dict(sorted(process_results(file_contents).items()))
+    teamName = process_results(file_contents)
+
 
     for key in teamName:
-        print(f"{key:>20}{teamName[key]:>69}")
+        print(f"{key[0]:>20}{key[1]:>69}")
