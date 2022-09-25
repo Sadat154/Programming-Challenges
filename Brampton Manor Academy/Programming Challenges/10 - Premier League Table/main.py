@@ -61,6 +61,8 @@ def process_results(rows):
             team_name_dictionary[teams[2]][4] += 1
             team_name_dictionary[teams[2]][1] += 1
 
+
+
         team_name_dictionary[teams[1]][5] += (int(teams[3]))
         team_name_dictionary[teams[2]][5] += (int(teams[4]))
 
@@ -81,4 +83,6 @@ if __name__ == "__main__":
 
 
     for key in teamName:
-        print(f"{key[0]:>20}{key[1][0]:>15}{key[1][1]:>11}{key[1][2]:>12}{(key[1][5]-key[1][6]):>15}{key[1][4]:>20}")
+        key[1][3] = (key[1][5]-key[1][6]) # Goals Conceded
+
+        print(f"{key[0]:>20}{key[1][0]:>15}{key[1][1]:>11}{key[1][2]:>12}{(key[1][3]):>15}{key[1][4]:>20}")
