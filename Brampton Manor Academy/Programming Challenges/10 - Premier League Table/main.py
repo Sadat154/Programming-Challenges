@@ -27,7 +27,7 @@ def process_results(rows):
     for row in rows:
         teams = originalVal[counter]
 
-        team_name_dictionary[teams[1]] = [0,0,0,0,0,0,0] # 5 = goals scored, 6 = goals conceded,3 = goal difference
+        team_name_dictionary[teams[1]] = [0,0,0,0,0,0,0,0,0] # 5 = goals scored, 6 = goals conceded, 7 = Total Shot,3 = goal difference, 8 =shots on target
 
         counter += 1
 
@@ -38,9 +38,10 @@ def process_results(rows):
         teams = originalVal[counter]
 
         if teams[5] == "H": #4 = total points,3 = goal dif, 2 = losses, 1 = draws, 0 = wins
-            team_name_dictionary[teams[1]][4] += 3
-            team_name_dictionary[teams[1]][0] += 1
-            team_name_dictionary[teams[2]][2] += 1
+            team_name_dictionary[teams[1]][4] += 3 # adds 3 to total point
+            team_name_dictionary[teams[1]][0] += 1 # adds 1 to win
+            team_name_dictionary[teams[2]][2] += 1 # adds 1 to loss of away team
+
 
 
 
@@ -63,26 +64,61 @@ def process_results(rows):
 
 
 
+
         team_name_dictionary[teams[1]][5] += (int(teams[3]))
         team_name_dictionary[teams[2]][5] += (int(teams[4]))
 
         team_name_dictionary[teams[1]][6] += int(teams[4])
         team_name_dictionary[teams[2]][6] += int(teams[3])
 
+
+        team_name_dictionary[teams[1]][7] += int(teams[7]) # Stores shots taken by home tean
+        team_name_dictionary[teams[2]][7] += int(teams[8]) # Stores shots taken by away team
+
+        team_name_dictionary[teams[1]][8] += int(teams[9])  # Stores shots on target taken by home team
+        team_name_dictionary[teams[2]][8] += int(teams[10])  # Stores shots on target taken by away team
+
+
+
+
+
         counter +=1
+
+
 
     listedTeamNames = sorted(team_name_dictionary.items(), key=lambda x: x[1], reverse=True)
     return(listedTeamNames)
 
 
-print(f"{'Place':<10} {'Team Name':<20} {'Wins':<10} {'Draws':<10} {'Losses':<10} {'Goal Difference':<20} {'Total Points':<10}")
+
+
 
 if __name__ == "__main__":
     file_contents = read_csv(csv_file)
     teamName = process_results(file_contents)
-
+    print(f"{'':<10} {'Team Name':<20} {'Wins':<10} {'Draws':<10} {'Losses':<10} {'Goal Difference':<20} {'Total Points':<10}")
+    print(teamName[1])
 
     for key in teamName:
         key[1][3] = (key[1][5]-key[1][6]) # Goals Conceded
 
+
         print(f"{key[0]:>20}{key[1][0]:>15}{key[1][1]:>11}{key[1][2]:>12}{(key[1][3]):>15}{key[1][4]:>20}")
+
+
+    for key in teamName:
+        key[1].append(0)
+
+        for test in teamName:
+            key[1][9] = key[1][7]/key[1][8]
+
+
+    accurateTeamList = sorted(teamName, key=lambda x: x[1][9], reverse=True)
+    print(accurateTeamList)
+    print("Single Statistics:")
+    print(f"a. Most accurate team (Total shots on target / total shots) = {accurateTeamList[0][0]}")
+    print(f"b. Least accurate team (Total shots on target / total shots) {accurateTeamList[-1][0]}")
+    print("c. Dirtiest team (most fouls per game)")
+    print("d. Cleanest team (least fouls per game)")
+    print("e. Referee with highest card average per game (Yellows +1, Red+2)")
+    print("f. Referee with lowest card average per game (Yellows +1, Red+2)")
