@@ -1,16 +1,17 @@
 def dictOfWords():
 
     wordDict = {}
+    while True:
+        try:
+            word = input("Enter a word: ")
 
-    try:
-        word = input("Enter a word: ")
+            if word.isalpha() == False:
+                raise ValueError
+        except ValueError:
+            print("Please enter only alphabetical characters!")
+        else:
+            break
 
-        if word.isalpha() == False:
-            raise ValueError
-    except ValueError:
-        print("Please enter only alphabetical characters!")
-        dictOfWords()
-        exit()
 
     # previousCharacter = ""
 
