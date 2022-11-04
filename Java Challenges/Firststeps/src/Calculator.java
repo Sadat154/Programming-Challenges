@@ -17,7 +17,7 @@ public class Calculator {
             case 5 -> System.out.println(square(num1));
             case 6 -> System.out.println(cube(num1));
             case 7 -> System.out.println(powerOf(num1,num2));
-            default -> System.out.println("Please enter numbers from 1 to 4!");
+            default -> System.out.println("Please enter numbers from 1 to 7!");
         }
 
 
