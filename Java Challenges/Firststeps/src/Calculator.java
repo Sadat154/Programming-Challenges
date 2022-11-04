@@ -1,24 +1,22 @@
 
-import java.util.Scanner;
 public class Calculator {
 
 
     public static void main(String[] args) {
-        Scanner user_choices = new Scanner(System.in);
-        System.out.println("Please Choose the following options: \n 1. Addition\n 2. Subtraction\n 3. Multiplications\n 4. Division");
+        int operation = Integer.parseInt(args[0]);
+        int num1 = Integer.parseInt(args[1]);
+        int num2 = Integer.parseInt(args[2]);
 
+        System.out.println(" Option 1. Addition \n Option 2. Subtraction \n Option 3. Multiplication \n Option 4: Division \n Option 5: Square \n Option 6: Cube \n Option 7: Multiply a to the power of b");
 
-        int operation_choice = user_choices.nextInt();
-        System.out.println("Please enter your number choices: ");
-
-        float num1 = user_choices.nextFloat();
-        float num2 = user_choices.nextFloat();
-
-        switch (operation_choice) {
+        switch (operation) {
             case 1 -> System.out.println(addition(num1, num2));
             case 2 -> System.out.println(subtraction(num1, num2));
             case 3 -> System.out.println(multiplication(num1, num2));
             case 4 -> System.out.println(division(num1, num2));
+            case 5 -> System.out.println(square(num1));
+            case 6 -> System.out.println(cube(num1));
+            case 7 -> System.out.println(powerOf(num1,num2));
             default -> System.out.println("Please enter numbers from 1 to 4!");
         }
 
@@ -49,6 +47,23 @@ public class Calculator {
         return divisionanswer;
     }
 
+    private static float square(float a) {
+        float squareanswer = a*a;
+
+        return squareanswer;
+
+    }
+
+    private static float cube(float a) {
+        float cubeanswer = a*a*a;
+
+        return cubeanswer;
 
 
+    }
+
+    private static double powerOf(double a, double b) {
+        return (Math.pow(a,b));
+
+    }
 }
