@@ -34,8 +34,21 @@ if __name__ == "__main__":
     run()
     
     
-    
-    
+   ####################
+def pascals(p):
+    result = [[1],[1,3,3,1]]
+
+    middle_num = [sum(result[-1][x:x + 2]) for x in range(len(result[-1]) - 1)]
+    answer = [x for x in middle_num]
+    print(answer)
+
+
+
+
+
+
+
+print(pascals(5))
     
     
     
