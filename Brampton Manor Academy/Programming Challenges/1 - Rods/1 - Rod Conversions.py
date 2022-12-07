@@ -52,6 +52,58 @@ print(pascals(5))
     
     
     
+    #####################
+   
+
+def fibonacci_series(n):
+    answer = [1,2]
+    for i in range(n-2):
+        answer.append(sum(answer[i:i+2]))
+
+    return answer[::-1]
+
+def zeckendorf_representation(n, fibonacci):
+    resultList = []
+    answer = n
+    counter = 0
+
+    test = [x for x in fibonacci if x < 53316291173]
+
+    # Q1b answe = 832040 as thats the largest output answer when n = 1000000
+    print(test[0:])
+    for i in range(53316291173,0 , -1):
+        arr = []
+        q = i
+
+        for j in test:
+            if q - j >= 0:
+                q -= j
+                arr.append(j)
+            if len(arr) > 3:
+                break
+        if len(arr) == 3:
+            counter += 1
+
+    return counter
+
+
+
+    # for i in fibonacci:
+    #     if answer - i >= 0:
+    #         answer -= i
+    #         resultList.append(i)
+    # return resultList
+
+
+
+
+
+if __name__ == '__main__':
+    fibonacci = fibonacci_series(100000)
+    userChoice = int(input("Please choose the number: "))
+    print(zeckendorf_representation(userChoice,fibonacci))
+
+    
     
     
     
