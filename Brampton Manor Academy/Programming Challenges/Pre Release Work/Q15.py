@@ -118,7 +118,7 @@ def LoadAsciiImage(FileIn, Grid, Header):
         DisplayError("Image data error")
     return Grid
 
-def CompressFile(Header):
+def CompressFile():
     FileName = input("Enter the name of the file you would like to compress: ")
     FileIn = open(FileName + ".txt", "r")
 
@@ -164,6 +164,8 @@ def LoadFile(Grid, Header):
         elif Header.FileType == 'G':
             Grid = LoadGreyScaleImage(FileIn, Grid, Header)
             FileTypeOK = True
+
+
 
         FileIn.close()
         if not FileTypeOK:
@@ -232,7 +234,7 @@ def Graphics():
         elif MenuOption == 'S':
             SaveImage(Grid, Header)
         elif MenuOption == 'C':
-            CompressFile(Header)
+            CompressFile()
         elif MenuOption == 'X':
             ProgramEnd = True
 
