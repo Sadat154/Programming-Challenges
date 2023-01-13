@@ -245,6 +245,8 @@ def SolvePuzzle(PuzzleGrid, Puzzle, Answer):
           Answer[2] = str(int(Answer[2]) + 1)
           Answer[int(Answer[2]) + 2] = CellInfo
           DisplayGrid(PuzzleGrid)
+        else:
+          print("You cannot change this number!")
 
 
 
