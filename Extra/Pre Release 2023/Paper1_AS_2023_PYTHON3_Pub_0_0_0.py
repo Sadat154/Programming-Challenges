@@ -92,9 +92,9 @@ def LoadFile(SourceCode):
         SourceCode[0] = str(LineNumber)
     except:
         if not FileExists:
-            print("Error Code 1")
+            print("The file does not exist")
         else:
-            print("Error Code 2")
+            print("The loaded file cannot be read correctly e.g., bad line")
             SourceCode[0] = str(LineNumber - 1)
     if LineNumber > 0:
         DisplaySourceCode(SourceCode)
@@ -131,7 +131,7 @@ def UpdateSymbolTable(SymbolTable, ThisLabel, LineNumber):
     :return type: Dict
     """
     if ThisLabel in SymbolTable:
-        print("Error Code 3")
+        print("The Label is not unique and already exists")
     else:
         SymbolTable[ThisLabel] = LineNumber
     return SymbolTable
@@ -149,11 +149,11 @@ def ExtractLabel(Instruction, LineNumber, Memory, SymbolTable):
         ThisLabel = ThisLabel.strip()
         if ThisLabel != EMPTY_STRING:
             if Instruction[5] != ':':
-                print("Error Code 4")
+                print(": does not follow the label, please fix this!")
                 Memory[0].OpCode = "ERR"
             else:
                 SymbolTable = UpdateSymbolTable(SymbolTable, ThisLabel, LineNumber)
-                print(SymbolTable)
+
 
     return SymbolTable, Memory
 
@@ -176,7 +176,7 @@ def ExtractOpCode(Instruction, LineNumber, Memory):
             Memory[LineNumber].OpCode = Operation
         else:
             if Operation != EMPTY_STRING:
-                print("Error Code 5")
+                print("The opcode is not recognised")
                 Memory[0].OpCode = "ERR"
     return Memory
 
@@ -235,7 +235,7 @@ def PassTwo(Memory, SymbolTable, NumberOfLines):
                     OperandValue = int(Operand)
                     Memory[LineNumber].OperandValue = OperandValue
                 except:
-                    print("Error Code 6")
+                    print("Operand is not an integer or valid label")
                     Memory[0].OpCode = "ERR"
     return Memory
 
@@ -506,8 +506,7 @@ def ExecuteJSR(Memory, Registers, Address):
     """
     StackPointer = Registers[TOS] - 1
     Memory[StackPointer].OperandValue = Registers[PC]
-    print(Registers)
-    print(Registers[PC])
+
     Registers[PC] = Address
     Registers[TOS] = StackPointer
     DisplayStack(Memory, Registers)
@@ -544,6 +543,9 @@ def Execute(SourceCode, Memory):
     DisplayCurrentState(SourceCode, Memory, Registers)
     OpCode = Memory[Registers[PC]].OpCode
     while OpCode != "HLT":
+        if int(SourceCode[0]) == Registers[TOS]:
+            print("Stack overflow error")
+            break
         FrameNumber += 1
         print()
         DisplayFrameDelimiter(FrameNumber)
@@ -578,6 +580,7 @@ def Execute(SourceCode, Memory):
             DisplayCurrentState(SourceCode, Memory, Registers)
         else:
             OpCode = "HLT"
+        print(Registers[TOS], "TOSTOSTOS")
     print("Execution terminated")
 
 
@@ -600,25 +603,25 @@ def AssemblerSimulator():
             Memory = ResetMemory(Memory)
         elif MenuOption == 'D':
             if SourceCode[0] == EMPTY_STRING:
-                print("Error Code 7")
+                print("The number of lines of code is empty/ trying to display source code before file is loaded")
             else:
                 DisplaySourceCode(SourceCode)
         elif MenuOption == 'E':
             if SourceCode[0] == EMPTY_STRING:
-                print("Error Code 8")
+                print("The number of lines of code is empty/ trying to edit source code before file is loaded")
             else:
                 SourceCode = EditSourceCode(SourceCode)
                 Memory = ResetMemory(Memory)
         elif MenuOption == 'A':
             if SourceCode[0] == EMPTY_STRING:
-                print("Error Code 9")
+                print("The number of lines of code is empty/ trying to assemble code before file is loaded")
             else:
                 Memory = Assemble(SourceCode, Memory)
         elif MenuOption == 'R':
             if Memory[0].OperandValue == 0:
-                print("Error Code 10")
+                print("Pass One is unsuccessful")
             elif Memory[0].OpCode == "ERR":
-                print("Error Code 11")
+                print("Pass Two is unsuccessful")
             else:
                 Execute(SourceCode, Memory)
         elif MenuOption == 'X':
