@@ -274,7 +274,7 @@ def SetFlags(Value, Registers):
         Registers[STATUS] = ConvertToDecimal("0100")
     elif Value > MAX_INT or Value < -(MAX_INT + 1):
         Registers[STATUS] = ConvertToDecimal("0010")
-    elif ConvertToBinary(Value).count("1") % 2 != 0 and "1" in ConvertToBinary(Value):
+    elif ConvertToBinary(Registers[ACC]).count("1") % 2 == 0 and "1" in ConvertToBinary(Registers[ACC]):
         Registers[STATUS] = ConvertToDecimal("0001")
     else:
         Registers[STATUS] = ConvertToDecimal("0000")
