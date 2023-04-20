@@ -229,18 +229,32 @@ def ConvertToBinary(DecimalNumber):
         DecimalNumber = DecimalNumber // 2
     while len(BinaryString) < 4: # No longer 3 digits long but 4 (addition of parity bit)
         BinaryString = '0' + BinaryString
-
-    # if DecimalNumber < 0:
-    #     DecimalNumber *= -1
-    #     while DecimalNumber > 0:
-    #         Remainder = DecimalNumber % 2
-    #         Bit = str(Remainder)
-    #         BinaryString = Bit + BinaryString
-    #         DecimalNumber = DecimalNumber // 2
-    #
-    #
+    if DecimalNumber < 0:
+        DecimalNumber *= -1
+        BinaryString = TwosComplement(ConvertToBinary(DecimalNumber))
+ 
     return BinaryString
 
+
+def TwosComplement(BinaryString):
+    FinalAns = ""
+    if BinaryString[0] == "1":
+        BinaryString = "0" + BinaryString
+        for i in range(len(BinaryString)):
+            if BinaryString[i] == "1":
+                FinalAns += "0"
+            else:
+                FinalAns += "1"
+    else: # if it is 0, just flip then add 1
+        for i in range(len(BinaryString)):
+            if BinaryString[i] == "1":
+                FinalAns += "0"
+            else:
+                FinalAns += "1"
+    PosDecimal = ConvertToDecimal(FinalAns)
+    PosDecimal += 1
+
+    return ConvertToBinary(PosDecimal)
 
 def ConvertToDecimal(BinaryString):
     DecimalNumber = 0
