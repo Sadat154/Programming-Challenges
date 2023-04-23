@@ -404,11 +404,17 @@ def BitwiseOperations(Value, Operand, Operation):
         "1" : "0",
         "0" : "1"
     }
-
+    FinalBinary = ""
     BinaryValue = ConvertToBinary(Value)
     BinaryOperand = ConvertToBinary(Operand)
+    
+    if len(BinaryOperand) > len(BinaryValue):
+        BinaryValue = BinaryValue.rjust((len(BinaryOperand)), "0")
 
-    FinalBinary = ""
+    elif len(BinaryValue) > len(BinaryOperand):
+        BinaryOperand = BinaryOperand.rjust((len(BinaryValue)), "0")
+    
+  
 
     BinaryValue = BinaryValue.rjust(8, "0")
     BinaryOperand = BinaryOperand.rjust(8, "0")
