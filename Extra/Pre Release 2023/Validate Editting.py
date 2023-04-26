@@ -114,10 +114,11 @@ def EditSourceCode(SourceCode):
                 FileName = input("Enter the file name that you would like to save the contents to: ")
 
 
-                with open(FileName, 'w') as the_file:
+                with open(FileName + ".txt", 'w') as the_file:
                     for i in range(1,len(SourceCode)):
                         the_file.write(SourceCode[i])
                         the_file.write("\n")
+                    
 
 
         DisplaySourceCode(SourceCode)
