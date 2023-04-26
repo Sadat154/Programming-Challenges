@@ -116,8 +116,8 @@ def EditSourceCode(SourceCode):
 
                 with open(FileName + ".txt", 'w') as the_file:
                     for i in range(1,len(SourceCode)):
-                        the_file.write(SourceCode[i])
-                        the_file.write("\n")
+                        the_file.write(SourceCode[i] + "\n")
+                        
                     
 
 
