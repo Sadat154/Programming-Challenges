@@ -30,6 +30,7 @@ def DisplayMenu():
     print("L - Load a program file")
     print("D - Display source code")
     print("E - Edit source code")
+    print("S - Save edit")
     print("A - Assemble program")
     print("R - Run the program")
     print("X - Exit simulator")
@@ -107,22 +108,8 @@ def EditSourceCode(SourceCode):
             Choice = input("Enter your choice: ")
         if Choice == "E":
             SourceCode[LineNumber] = input("Enter the new line: ")
-            Save = input("Would you like to save this change (Y/N): ")
-
-
-            if Save == "Y":
-                FileName = input("Enter the file name that you would like to save the contents to: ")
-
-
-                with open(FileName + ".txt", 'w') as the_file:
-                    for i in range(1,len(SourceCode)):
-                        the_file.write(SourceCode[i] + "\n")
-                        
-                    
-
-
-        DisplaySourceCode(SourceCode)
-    return SourceCode
+            DisplaySourceCode(SourceCode)
+        return SourceCode
 
 
 def UpdateSymbolTable(SymbolTable, ThisLabel, LineNumber):
@@ -442,6 +429,16 @@ def AssemblerSimulator():
             else:
                 SourceCode = EditSourceCode(SourceCode)
                 Memory = ResetMemory(Memory)
+        elif MenuOption == 'S':
+            if SourceCode[0] == EMPTY_STRING:
+                print("Error Code 8")
+            else:
+                FileName = input("Enter the file name that you would like to save the contents to: ")
+
+                with open(FileName + '.txt', 'w') as the_file:
+                    for i in range(1, len(SourceCode)):
+                        the_file.write(SourceCode[i])
+                        the_file.write("\n")
         elif MenuOption == 'A':
             if SourceCode[0] == EMPTY_STRING:
                 print("Error Code 9")
