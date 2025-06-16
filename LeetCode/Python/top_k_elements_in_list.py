@@ -1,13 +1,15 @@
-class Solution:
-    def topKFrequent(self, nums: list[int], k: int) -> list[int]:
-        unique = set(nums)
-        x = sorted([[nums.count(i), i] for i in unique], reverse=True)
-        finalAns = []
-
-        for i in range(k):
-            finalAns.append(x[i][1])
-        return finalAns
-
+# class Solution:
+#     def topKFrequent(self, nums: list[int], k: int) -> list[int]:
+#         unique = set(nums)
+#         x = sorted([[nums.count(i), i] for i in unique], reverse=True)
+#         finalAns = []
+#
+#         for i in range(k):
+#             finalAns.append(x[i][1])
+#         return finalAns
+#
+#
+from collections import defaultdict
 
 
 #
@@ -26,3 +28,17 @@ class Solution:
 #
 #     return res
 #Better solution
+
+# class Solution:
+#     def topKFrequent(self, nums: list[int], k: int) -> list[int]:
+#         counter = {}
+#         for num in nums:
+#             counter[num] = 1 + counter.get(num, 0)
+#
+#         test = (sorted(counter.items(), key=lambda x: x[1], reverse=True))
+#         return [i[0] for i in test[:k]]
+#
+
+x = Solution()
+print(x.topKFrequent([2,2,3,4,1,1,2], 2)
+)
